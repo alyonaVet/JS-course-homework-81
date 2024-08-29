@@ -1,10 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import linksRouter from "./routers/links";
 
 const app = express();
 const port = 8000;
 
 app.use(express.json());
+app.use('/links', linksRouter);
 
 const run = async () => {
     await mongoose.connect('mongodb://localhost/link-shortener');
