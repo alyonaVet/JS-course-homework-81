@@ -8,13 +8,14 @@ const linksRouter = express.Router();
 linksRouter.get('/:shortUrl', async (req, res, next) => {
     try {
         const shortUrl = req.params.shortUrl;
+
         const link = await Link.findOne({shortUrl});
 
         if (!link) {
             return res.status(404).send({error: 'Link not found'});
         }
 
-        return res.status(301).redirect(link.originalUrl);
+        return res.status(301).redirect(`${link.originalUrl}`);
 
     } catch (error) {
         return next(error);
